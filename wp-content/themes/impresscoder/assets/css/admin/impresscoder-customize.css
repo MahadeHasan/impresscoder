@@ -1,0 +1,16 @@
+.impresscoder-range-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 5px;
+}
+
+.impresscoder-range-control .range-value {
+  width: 65px !important;
+  background-color: var(--impresscoder-dark);
+  border-color: var(--impresscoder-dark);
+  color: #fff;
+  font-weight: 600 !important;
+}
+
+/*# sourceMappingURL=impresscoder-customize.css.map */

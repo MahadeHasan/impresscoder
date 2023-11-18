@@ -1,0 +1,58 @@
+{
+  "name": "impresscoder",
+  "version": "1.0.0",
+  "description": "WordPress Directory & Listing theme",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run css",
+    "css-compile": "node-sass --include-path node_modules --output-style expanded --source-map true --source-map-contents true --precision 6 assets/scss -o assets/css/",
+    "css-lint": "stylelint assets/scss/",
+    "css-prefix": "postcss --replace assets/css/impresscoder.css --use autoprefixer --map",
+    "css-rtl": "rtlcss assets/css/impresscoder.css assets/css/impresscoder.rtl.css",
+    "css-purge": "purgecss --keyframes --css assets/css/impresscoder.css --content index.html \"node_modules/bootstrap/js/dist/{util,modal}.js\" --output assets/css/",
+    "css": "npm-run-all css-compile css-prefix css-rtl",
+    "start": "npm-run-all --parallel watch",
+    "test": "npm run css-lint && npm run css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MahadeHasan/impresscoder"
+  },
+  "keywords": [
+    "directory",
+    "portal",
+    "map",
+    "dashboard",
+    "blogs"
+  ],
+  "author": "themeperch",
+  "license": "MIT",
+  "homepage": "https://github.com/MahadeHasan/impresscoder#readme",
+  "dependencies": {
+    "autoprefixer": "^10.4.7",
+    "bootstrap": "^5.2.3",
+    "codyhouse-framework": "^3.0.6",
+    "node-sass": "^8.0.0",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.14",
+    "postcss-cli": "^10.0.0",
+    "rtlcss": "^4.0.0",
+    "sass": "^1.54.0",
+    "stylelint": "^14.9.1",
+    "stylelint-config-twbs-bootstrap": "^7.0.0",
+    "swiper": "^8.4.5"
+  },
+  "rtlcssConfig": {
+    "options": {
+      "autoRename": false,
+      "autoRenameStrict": false,
+      "blacklist": {},
+      "clean": true,
+      "greedy": false,
+      "processUrls": false,
+      "stringMap": []
+    },
+    "plugins": [],
+    "map": false
+  }
+}
