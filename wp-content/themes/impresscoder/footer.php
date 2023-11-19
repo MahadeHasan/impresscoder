@@ -10,7 +10,7 @@
  */
 
 ?>
-	<?php get_template_part( 'template-parts/footer/newsletter' ); ?>	
+	<?php //get_template_part( 'template-parts/footer/newsletter' ); ?>	
 	</main>
 	
 	<footer <?php impresscoder_footer_class(); ?>>

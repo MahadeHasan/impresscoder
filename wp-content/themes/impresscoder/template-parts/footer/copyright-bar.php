@@ -5,9 +5,12 @@ contains copyright text and footer menu
 */
 
 extract(wp_parse_args($args, array(
-    'copyright_text' => sprintf('&copy; %s %s, WordPress Theme by %s', date('Y'), esc_attr(get_bloginfo( 'name', 'display' )), '<a href="//themeperch.net/">Themeperch</a>')
+    'copyright_text' => get_theme_mod('copyright_text', sprintf('&copy; %s %s, WordPress Theme by %s', date('Y'), esc_attr(get_bloginfo('name', 'display')), '<a href="//impresscoder.com/">Impresscoder</a>')),
+    'copyright_link' => get_theme_mod('copyright_link', '#')
 )));
 
+$copyright_text = impresscoder_parse_link_text($copyright_text, $copyright_link);
+ 
 ?>
 <div <?php impresscoder_copyright_class() ?>>
     <div class="container">

@@ -37,16 +37,43 @@ function impresscoder_register_required_plugins() {
 	 */
 	$plugins = array(		
 		array(
-			'name'      => 'Meta Box',
-			'slug'      => 'meta-box',
-			'required'  => true
+			'name'      		=> esc_attr(__('Breadcrumb NavXT', 'impresscoder-elements')),
+			'slug'      		=> 'breadcrumb-navxt',
+			'required'  		=> true
 		),
 		array(
-			'name'      => 'Breadcrumb NavXT',
-			'slug'      => 'breadcrumb-navxt',
-			'required'  => true
-		)
-
+			'name'      		=> esc_attr(__('Elementor', 'impresscoder-elements')),
+			'slug'      		=> 'elementor',
+			'required'  		=> true
+		),
+		array(
+			'name'      		=> esc_attr(__('Meta Box ', 'impresscoder-elements')),
+			'slug'      		=> 'meta-box',
+			'required'  		=> true
+		),
+		array(
+			'name' 				=> esc_attr(__('Contact form 7', 'impresscoder-elements')),
+			'slug' 				=> 'contact-form-7',
+			'required' 			=> false
+		),
+		array(
+			'name'               => esc_attr(__('Control Email Subscriber', 'impresscoder-elements')),
+			'slug'               => 'control-email-subscriber', // The plugin slug (typically the folder name).
+			'source'             => __DIR__ . '/plugins/control-email-subscriber.zip',
+			'required'           => true,
+			'version'            => '1.0.0',
+			'force_activation'   => false,
+			'force_deactivation' => false
+		),
+		array(
+			'name'               => esc_attr(__('Impresscoder Elements', 'impresscoder-elements')),
+			'slug'               => 'impresscoder-elements', // The plugin slug (typically the folder name).
+			'source'             => __DIR__ . '/plugins/impresscoder-elements.zip',
+			'required'           => true,
+			'version'            => '1.0.0',
+			'force_activation'   => false,
+			'force_deactivation' => false
+		),
 	);
 
 	/*

@@ -120,7 +120,7 @@ if ( ! function_exists( 'impresscoder_entry_meta_footer' ) ) {
 
 			
 			// Posted on.
-			impresscoder_posted_by();
+			//impresscoder_posted_by();
 
 			// Edit post link.
 			edit_post_link(
@@ -139,9 +139,9 @@ if ( ! function_exists( 'impresscoder_entry_meta_footer' ) ) {
 
 			echo '<div class="posted-by d-flex flex-wrap gap-10">';
 			// Posted on.
-			impresscoder_posted_on();
+			//impresscoder_posted_on();
 			// Posted by.
-			impresscoder_posted_by();
+			//impresscoder_posted_by();
 			// Edit post link.
 			edit_post_link(
 				sprintf(

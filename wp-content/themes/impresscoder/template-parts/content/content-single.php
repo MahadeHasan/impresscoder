@@ -13,6 +13,6 @@
                 ?>
         </div>
         <div class="entry-footer text-muted border-top pt-10 mt-30">
-        <?php impresscoder_entry_meta_footer(); ?>
+                <?php impresscoder_entry_meta_footer(); ?>
         </div>
 </div>

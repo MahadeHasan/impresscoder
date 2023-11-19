@@ -254,7 +254,28 @@ final class Footer{
 				'type'    => 'textarea',
 				'section' => 'footer_settings',
 				'label'   => esc_html__( 'Copyright text', 'impresscoder' ),		
-				'description' => 	esc_html__( 'Use [date] for current year', 'impresscoder' ),		
+				'description' => 	esc_html__( 'Use [date] for current year. Use {your-link-text} to apply link to copyright text', 'impresscoder' ),		
+			)
+		);
+		//copyright_link
+		$wp_customize->add_setting(
+			'copyright_link',
+			array(
+				'capability'        => 'edit_theme_options',
+				'default'           => '',
+				'sanitize_callback' => static function ($value) {
+					return esc_url($value);
+				},
+			)
+		);
+
+		$wp_customize->add_control(
+			'copyright_link',
+			array(
+				'type'    => 'text',
+				'section' => 'footer_settings',
+				'label'   => esc_html__('Copyright link', 'impresscoder'),
+				'description' => 	esc_html__('Link apply to copyright text', 'impresscoder'),
 			)
 		);
 

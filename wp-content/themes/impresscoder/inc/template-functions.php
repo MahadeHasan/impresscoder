@@ -906,3 +906,22 @@ if( ! function_exists('impresscoder_search_icon') ){
 		else return $search_icon;
 	}
 }
+
+//impresscoder_parse_link_text copyright text
+if (!function_exists('impresscoder_parse_link_text')) {
+	function impresscoder_parse_link_text($text, $link = '')
+	{
+		preg_match_all("/\{([^\}]*)\}/", $text, $matches);
+		if (!empty($matches)) {
+			foreach ($matches[1] as $value) {
+				$find    = "{{$value}}";
+				$replace = "<a href='{$link}' class='color-primary'>{$value}</a>";
+
+				$text    = str_replace($find, $replace, $text);
+			} //$matches[1] as $value
+		} //!empty( $matches )
+
+		$text = str_replace(" / ", "<span class='color-linear'>/</span>", $text);
+		return $text;
+	}
+}
