@@ -1,11 +1,10 @@
-<?php 
-global $impresscoder;
+<?php  
 extract(wp_parse_args($args, [
-    'disable_banner' => $impresscoder->meta['disable_banner'],
+    'disable_banner' => impresscoder_get_post_meta('disable_banner',false),
     'custom_background' => 'off',
     'bg_image' => '',
     'banner_style' => '',
-    'disable_breadcrumbs' => $impresscoder->meta['disable_breadcrumbs'],
+    'disable_breadcrumbs' => impresscoder_get_post_meta('disable_breadcrumbs',false),
     'breadcrumbs_bg' => ''
 ]));
 ?>

@@ -14,7 +14,7 @@ trait Helper
 		$args = wp_parse_args($args, [
 			'prefix' => '',
 			'label' => esc_html__('WP Query', 'impresscoder-element'),
-			'posts_per_page' => 3,
+			'posts_per_page' => 5,
 			'post_type' => 'post',
 			'data' => '',
 			'extra_class' => '',
@@ -39,7 +39,55 @@ trait Helper
 				'default' => $args['post_type']
 			]
 		);
-
+		$instance->add_control(
+			'order',
+			[
+				'label' => esc_html__('Post order', 'impresscoder-element'),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'options' => [
+					'ASC' => 'ASC',
+					'DESC' => 'DESC'
+				],
+				'default' => 'DESC',
+			]
+		);
+		$instance->add_control(
+			'orderby',
+			[
+				'label' => esc_html__('Post order by', 'impresscoder-element'),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'options' => [
+					'none' => 'None',
+					'ID' => 'Post ID',
+					'title' => 'Title',
+					'date' => 'Publish Date',
+					'modified' => 'Updated date',
+					'rand' => 'Random',
+					'author' => 'Order by author',
+				],
+				'default' => 'date',
+			]
+		);
+		$instance->add_control(
+			$args['prefix'] . 'post__in',
+			[
+				'label' => esc_html__('Specify posts to retrieve', 'impresscoder-element'),
+				'type' => \Elementor\Controls_Manager::SELECT2,
+				'label_block' => true,
+				'options' => array_column((array)get_posts(['posts_per_page' => -1]), 'post_title', 'ID'),
+				'multiple' => true,
+			]
+		);
+		$instance->add_control(
+			$args['prefix'] . 'category__in',
+			[
+				'label' => esc_html__('Specify category to retrieve', 'impresscoder-element'),
+				'type' => \Elementor\Controls_Manager::SELECT2,
+				'label_block' => true,
+				'options' => array_column((array)get_terms(['taxonomy' => 'category', 'hide_empty' => true]), 'name', 'term_id'),
+				'multiple' => true,
+			]
+		);
 		$instance->add_control(
 			$args['prefix'] . 'posts_per_page',
 			[
@@ -49,6 +97,14 @@ trait Helper
 				'step' => '1',
 				'max' => '50',
 				'default' => $args['posts_per_page']
+			]
+		);
+		$instance->add_control(
+			$args['prefix'] . 'ignore_sticky_posts',
+			[
+				'label' => esc_html__('Ignore sticky posts', 'jt-elementor'),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'default' => true,
 			]
 		);
 

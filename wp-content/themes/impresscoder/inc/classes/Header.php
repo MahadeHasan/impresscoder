@@ -266,6 +266,54 @@ final class Header{
 				}		
 			)
 		);
+		
+		// custom nav button extra class
+		$wp_customize->add_setting(
+			'button_target_link',
+			array(
+				'capability'        => 'edit_theme_options',
+				'default'           => false,
+				'sanitize_callback' => array(__NAMESPACE__ . '\\Customize', 'sanitize_checkbox'),
+			)
+		);
+
+		$wp_customize->add_control(
+			'button_target_link',
+			array(
+				'type'    			=> 'checkbox',
+				'section' 			=> 'header_image',
+				'label'   			=> esc_html__('Link open new tab ', 'impresscoder'),
+				'active_callback' => static function () {
+					return get_theme_mod('custom_nav_button') ? true : false;
+				}
+			)
+		);
+
+		// custom nav button extra class
+		$wp_customize->add_setting(
+			'button_extra_class',
+			array(
+				'capability'        => 'edit_theme_options',
+				'default'           => 'rounded-pill',
+				'sanitize_callback' => static function ($value) {
+					return esc_attr($value);
+				}
+			)
+		);
+
+		$wp_customize->add_control(
+			'button_extra_class',
+			array(
+				'type'    			=> 'text',
+				'section' 			=> 'header_image',
+				'label'   			=> esc_html__('Button Extra Class', 'impresscoder'),
+				'active_callback' => static function () {
+					return get_theme_mod('custom_nav_button') ? true : false;
+				}
+			)
+		);
+
+
 		// banner_bg_color
 		$wp_customize->add_setting(
 			'nav_button_style',

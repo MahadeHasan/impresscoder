@@ -39,62 +39,76 @@
             }
         }        
     });
+ 
 
-    if($(".clientsCarousel").length){
-        var impresscoderClientsCarousel = new Swiper(".clientsCarousel", {
-            slidesPerView: 5,
-            spaceBetween: 20,   
-            loop: false,
-            loopFillGroupWithBlank: false,
-            navigation: false,            
-            breakpoints: {
-                240: {
-                    slidesPerView: 1,
-                },
-                768: {
-                slidesPerView: 3,
-                },
-                992: {
-                slidesPerView: 4,
-                },
-                1024: {
-                slidesPerView: 5,
-                },
-              },
-          });
-    }
-  
-    // Login modal
-    if($("#citikidLoginModal").length){
-        const citikidLoginModal = document.getElementById('citikidLoginModal')
-        citikidLoginModal.addEventListener('show.bs.modal', event => {
-            localStorage.setItem('citikidLoginModal', true);
-            localStorage.removeItem('citikidRegisterModal');
-        });
-        citikidLoginModal.addEventListener('hidden.bs.modal', event => {
-            localStorage.removeItem('citikidLoginModal');
-        });
+ 
 
-        // Register modal
-        const citikidRegisterModal = document.getElementById('citikidRegisterModal')
-        citikidRegisterModal.addEventListener('show.bs.modal', event => {
-            localStorage.setItem('citikidRegisterModal', true);
-            localStorage.removeItem('citikidLoginModal');
-        });
-        citikidRegisterModal.addEventListener('hidden.bs.modal', event => {
-            localStorage.removeItem('citikidRegisterModal');
-        });
-        
-        
-        $(window).on('load', function(){
-            if(Boolean(localStorage.getItem('citikidLoginModal')) === true){
-                $('#citikidLoginModal').modal('show');            
-            }
-            if(Boolean(localStorage.getItem('citikidRegisterModal')) === true){
-                $('#citikidRegisterModal').modal('show');            
-            }
-        });
-    }
+  // A $( document ).ready() block.
+$( document ).ready(function() { 
+      // featured slider  
+      $('.post-sliders-activation').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: true,
+        dots: false,
+        fade: true,
+        loop: false,
+        asNavFor: '.featured-slider-nav',
+        prevArrow: '<span class="slick-prev"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/></svg></span>',
+        nextArrow: '<span class="slick-next"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/></svg></span>',
+        appendArrows: '.arrow-cover-2',
+    });   
+    $('.featured-slider-nav').slick({
+        slidesToShow: $('.featured-slider-nav').data('slides-show'),
+        slidesToScroll: 1,
+        vertical: true, 
+        loop: false,
+        asNavFor: '.post-sliders-activation',
+        dots: false,
+        arrows: false,
+        focusOnSelect: true,
+        verticalSwiping: true
+    });
+
+}); 
+  if ($('.swiper-category-sliders').length > 0) {
+      new Swiper(".swiper-category-sliders", {
+      spaceBetween: 16, 
+      slidesPerGroup: 1,
+      loop: $('.swiper-category-sliders').data('loop'),
+      navigation: {
+          nextEl: ".swiper-button-next-style-2",
+          prevEl: ".swiper-button-prev-style-2"
+      },
+
+      autoplay: {
+          delay: 10000
+      },
+      breakpoints: {
+          1500: {
+              slidesPerView: $('.swiper-category-sliders').data('slide-xxl'),
+          },
+          1200: {
+              slidesPerView: $('.swiper-category-sliders').data('slide-lg')
+          },
+          768: {
+              slidesPerView: $('.swiper-category-sliders').data('slide-md')
+          },
+          600: {
+              slidesPerView: 3
+          },
+          440: {
+              slidesPerView: 2
+          },
+          300: {
+              slidesPerView: 1
+          },
+          200: {
+              slidesPerView: 1
+          }
+      }
+  });
+}
 
     /*----------------------------------------------------*/
   /*  ScrollUp
@@ -154,21 +168,21 @@
 
   };
 
-  if($('#geometry').length){
-    $(document).on('change', '#geometry', function(){
-        let mapField = $(this).closest('.rwmb-meta-box').find('#map');
-        if(mapField.length > 0){
-            mapField.val($(this).val()+',14').trigger('update');
-            $('#address_listing').trigger('update');
-        }
-        update();
-    });
-  }
+  // if($('#geometry').length){
+  //   $(document).on('change', '#geometry', function(){
+  //       let mapField = $(this).closest('.rwmb-meta-box').find('#map');
+  //       if(mapField.length > 0){
+  //           mapField.val($(this).val()+',14').trigger('update');
+  //           $('#address_listing').trigger('update');
+  //       }
+  //       update();
+  //   });
+  // }
   
   
-  if('' !== CITYKID.backtoTop){
-    $.scrollUp();
-  }
+  // if('' !== CITYKID.backtoTop){
+  //   $.scrollUp();
+  // }
   
   
 }( jQuery ) );

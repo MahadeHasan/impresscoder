@@ -155,11 +155,23 @@ function impresscoder_get_header_class( $class = '' ) {
     $classes[] = $tra_header? 'bg-tra' : get_theme_mod('header_bg_color', 'bg-white');	
     $classes[] = $sticky_header? 'sticky-header-on' : 'sticky-header-off';		
 
-	if ( ! empty( $class ) ) {
-		if ( ! is_array( $class ) ) {
-			$class = preg_split( '#\s+#', $class );
+	$navbar_style = 'navbar-dark';
+	if (in_array('bg-tra', $classes)) {
+		$navbar_style = get_theme_mod('navbar_style', 'navbar-dark');
+		if (is_page()) {
+			$page_id = $wp_query->get_queried_object_id();
+			$navbar_style = get_post_meta($page_id, 'navbar_style', true);
 		}
-		$classes = array_merge( $classes, $class );
+	}
+	$classes[] = $navbar_style;
+	//sticky navbar class
+	$classes[] = $sticky_header ? 'sticky-navbar-off' : 'sticky-navbar';
+
+	if (!empty($class)) {
+		if (!is_array($class)) {
+			$class = preg_split('#\s+#', $class);
+		}
+		$classes = array_merge($classes, $class);
 	} else {
 		// Ensure that we always coerce class to being an array.
 		$class = array();
@@ -254,7 +266,6 @@ function impresscoder_get_navbar_class( $class = '' ) {
 	$navbar_style = in_array(get_theme_mod('header_bg_color', 'bg-white'), ['bg-dark', 'bg-danger', 'bg-primary', 'bg-secondary'])? 'navbar-dark' : 'navbar-light';
 
     $classes[] = in_array('bg-tra', impresscoder_get_header_class())? get_theme_mod('navbar_style', 'navbar-dark') : $navbar_style;	
-
 
 	if ( ! empty( $class ) ) {
 		if ( ! is_array( $class ) ) {

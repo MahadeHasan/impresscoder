@@ -31,6 +31,26 @@ return [
             'hidden' => [ 'disable_header', '=', true ]
         ],        
         [
+            'id' => 'custom_menu',
+            'type' => 'taxonomy',
+            'desc' => esc_attr__('Custom menu', 'eventiva'),
+            'taxonomy'   => 'nav_menu',
+            'field_type' => 'select',
+            'hidden' => ['disable_header', '=', true]
+        ],
+        [
+            'id' => 'navbar_style',
+            'type' => 'select',
+            'name' => 'Navbar Style',
+            'std' => 'navbar-dark',
+            'inline'  => false,
+            'options' => [
+                'navbar-light' => 'Light Style',
+                'navbar-dark' => 'Dark Style',
+            ],
+            'visible' => ['tra_header', '=', true]
+        ],
+        [
             'id' => 'disable_banner',
             'type' => 'checkbox',
             'desc' => 'Disable Banner',
@@ -84,10 +104,10 @@ return [
             'visible' => ['layout', '!=', 'full'] 
         ],         
         [
-            'id' => 'custom_footer_settings',
+            'id' => 'disable_footer',
             'type' => 'checkbox',
-            'desc' => 'Disable footer?',         
+            'desc' => 'Disable Footer ?',
+            'std' => false,
         ],
-        
     ],
 ];

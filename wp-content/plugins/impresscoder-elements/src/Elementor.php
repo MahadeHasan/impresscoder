@@ -15,6 +15,7 @@ class Elementor
 
     public function register_widget($widgets_manager)
     {
+        $widgets_manager->register(new Widgets\Slider());
         $widgets_manager->register(new Widgets\Impresscoder_Section_Title());
         $widgets_manager->register(new Widgets\About_Us());
         $widgets_manager->register(new Widgets\Impresscoder_Testimonials());

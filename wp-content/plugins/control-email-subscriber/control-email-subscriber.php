@@ -43,7 +43,7 @@ if (!function_exists('control_email_subscriber_form_shortcode')) {
 					<input id="mc-email" name="EMAIL" class="input-email form-control" autocomplete="off" type="email" placeholder="<?php echo esc_attr($mailchimp_form_email_placeholder) ?>" required="required">
 
 					<button type="submit" class="subscription-form-arrow">
-						<?php echo eventiva_get_icon_svg('ui', 'arrow-up-right', 25) ?>
+						<?php echo impresscoder_get_icon_svg('ui', 'arrow-up-right', 25) ?>
 					</button>
 
 				</div>
@@ -217,7 +217,7 @@ if (!function_exists('control_email_subscriber_form_submit')) {
 }
 // Form Settings
 if (!function_exists('control_email_subscriber_register_settings_page')) {
-	add_filter('ctrlbp_settings_pages', 'control_email_subscriber_register_settings_page');
+	add_filter('rwmb_settings_pages', 'control_email_subscriber_register_settings_page');
 	function control_email_subscriber_register_settings_page($settings_pages)
 	{
 		$settings_pages[] = [
@@ -235,7 +235,7 @@ if (!function_exists('control_email_subscriber_register_settings_page')) {
 // Form Fields
 
 if (!function_exists('control_email_subscriber_fields')) {
-	add_filter('ctrlbp_meta_boxes', 'control_email_subscriber_fields');
+	add_filter('rwmb_meta_boxes', 'control_email_subscriber_fields');
 	function control_email_subscriber_fields($meta_boxes)
 	{
 		$meta_boxes[] = [

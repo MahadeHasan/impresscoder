@@ -7,12 +7,12 @@ class Impresscoder_Category extends \Elementor\Widget_Base
 	use Traits\Style;
 	public function get_name()
 	{
-		return 'impresscodercategory-slides';
+		return 'impresscoder-category-slides';
 	}
 
 	public function get_title()
 	{
-		return esc_html__('Impresscoder Category', 'impresscoder-element');
+		return esc_html__('Category Slider', 'impresscoder-element');
 	}
 
 	public function get_icon()
@@ -27,7 +27,7 @@ class Impresscoder_Category extends \Elementor\Widget_Base
 
 	public function get_keywords()
 	{
-		return ['category'];
+		return ['category','slider'];
 	}
 
 	protected function register_controls()
@@ -42,36 +42,33 @@ class Impresscoder_Category extends \Elementor\Widget_Base
 			]
 		);
 		$this->add_control(
-			'title',
+			'xxl_device',
 			[
-				'label' => esc_html__('Title', 'impresscoder-element'),
-				'type' => \Elementor\Controls_Manager::TEXT,
-				'label_block' => true,
-				'default' => esc_html__('Hot topics', 'impresscoder-element'),
+				'label' => esc_html__('Slide XXL Device', 'impresscoder-element'), 
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'default' => 5,
+				'label-block' => true,
 			]
 		);
 		$this->add_control(
-			'sub_title',
+			'lg_device',
 			[
-				'label' => esc_html__('Description', 'impresscoder-element'),
-				'type' => \Elementor\Controls_Manager::TEXTAREA,
-				'label_block' => true,
-				'default' => esc_html__('Don\'t miss out on the latest news about Travel tips, Hotels review, Food guide...', 'impresscoder-element'),
+				'label' => esc_html__('Slide LG Device', 'impresscoder-element'), 
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'default' => 4,
+				'label-block' => true,
 			]
 		);
 		$this->add_control(
-			'category_slides_style',
+			'md_device',
 			[
-				'label' => esc_html__('Category Slide', 'impresscoder-element'),
-				'type' => \Elementor\Controls_Manager::SELECT,
-				'label_block' => true,
-				'default' => 'style1',
-				'options' => [
-					'style1' => esc_html__('Default', 'impresscoder-element'),
-					'style2' => esc_html__('Style 2', 'impresscoder-element'),
-				],
+				'label' => esc_html__('Slide MD Device', 'impresscoder-element'), 
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'default' => 3,
+				'label-block' => true,
 			]
 		);
+ 
 		$this->add_control(
 			'number_of_category',
 			[
@@ -129,6 +126,6 @@ class Impresscoder_Category extends \Elementor\Widget_Base
 	protected function render()
 	{
 		$settings = $this->get_settings_for_display();
-		impresscoder_framework_template('elements/impresscodercategory-slides', '', $settings);
+		impresscoder_framework_template('elements/impresscoder-category-slide', '', $settings);
 	}
 }

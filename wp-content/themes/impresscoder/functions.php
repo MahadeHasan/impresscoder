@@ -66,6 +66,7 @@ if ( ! function_exists( 'impresscoder_after_setup_theme' ) ) {
 		add_image_size( 'impresscoder-400x400-cropped', 400, 400, true );
 		add_image_size( 'impresscoder-450x350-cropped', 450, 350, true );
 		add_image_size( 'impresscoder-750x320-cropped', 750, 320, true );
+		add_image_size( 'impresscoder-1920x600-cropped', 1920, 600, true );
 
 		register_nav_menus(
 			array(

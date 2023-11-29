@@ -8,10 +8,14 @@ include __DIR__.'/template-tags.php';
 
 add_action('wp_enqueue_scripts', 'impresscoder_enqueue_assets');
 if( !function_exists('impresscoder_enqueue_assets') ){
-    function impresscoder_enqueue_assets(){
-
-		wp_register_style('swiper-bundle', get_theme_file_uri('assets/swiper/swiper-bundle.min.css'), false, '8.4.5');
-		wp_register_script('swiper-bundle', get_theme_file_uri('assets/swiper/swiper-bundle.min.js'), false , '8.4.5', true);
+    function impresscoder_enqueue_assets(){ 
+		
+		//swiper slider css
+		wp_enqueue_style('swiper-bundle', get_theme_file_uri('assets/swiper/swiper-bundle.min.css'), false, '8.4.5');
+		//slick slider css
+		wp_register_style('slick', get_theme_file_uri('assets/slick/slick.css'), [], '1.0.0');
+		wp_register_style('slicknav', get_theme_file_uri('assets/slick/slicknav.css'), [], '1.0.0');
+		
 
 		$suffix = is_rtl()? '.rtl' : '';
         wp_enqueue_style('magnific-popup', get_theme_file_uri('assets/css/magnific-popup.css'), [], '1.0.0');
@@ -25,7 +29,16 @@ if( !function_exists('impresscoder_enqueue_assets') ){
         // Javascripts
         wp_enqueue_script('bootstrap-bundle', get_theme_file_uri('assets/bootstrap/dist/js/bootstrap.bundle.min.js'), [], '5.0.3', true);
         wp_enqueue_script('magnific-popup', get_theme_file_uri('assets/js/jquery.magnific-popup.min.js'), ['jquery'], '5.0.3', true);
-        wp_enqueue_script('impresscoder-main', get_theme_file_uri('assets/js/main.js'), ['jquery', 'jquery-masonry', 'swiper-bundle'], '5.0.0', true);
+
+		wp_enqueue_script('swiper-bundle', get_theme_file_uri('assets/swiper/swiper-bundle.min.js'), false , '8.4.5', true);
+
+		//slick slider js
+		//wp_register_script('slicknav-js', get_theme_file_uri('assets/slick/jquery.slicknav.js'), ['jquery'], '5.0.3', true);
+		wp_register_script('slick-js', get_theme_file_uri('assets/slick/slick.min.js'), ['jquery'], '5.0.3', true);
+
+		
+
+        wp_enqueue_script('impresscoder-main', get_theme_file_uri('assets/js/main.js'), ['jquery', 'jquery-masonry'], '5.0.0', true);
         wp_enqueue_script('impresscoder-menu', get_theme_file_uri('assets/js/menu.js'), ['jquery'], '5.0.0', true);
 		$l10n = [
 			'stikyNavbar' => get_theme_mod('sticky_navbar', true),
@@ -784,7 +797,6 @@ function impresscoder_render_section_template($attributes, $is_preview = false, 
     if ( empty( $attributes['data'] ) ) {
         return;
     }
-
 	
 	$template_file = 'template-parts/blocks/'.$attributes['name'].'.php';
 	$section_template = locate_template($template_file); 
@@ -846,17 +858,27 @@ if(!function_exists('impresscoder_custom_button')){
 		$defaults = [
 			'text' => __('Button', 'impresscoder'),
 			'class' => 'btn-primary',
-			'link' => '#'
+			'link' => '#',			
+			'extra_class' => 'rounded-pill',
+			'target_link' => false,
 		];
 		$args = wp_parse_args($args, $defaults);
 		extract($args);
 
+		if (!empty($extra_class)) {
+			$class .= ' ' . $extra_class;
+		}
+
+		$target_link = $target_link == 1 ? '_blank' : '_self';
 		$html = sprintf(
-            '<a class="btn %2$s" href="%3$s">%1$s</a>',
-            $text, 
-            $class,
-			$link
-        );
+			'<a class="btn  %3$s" target="%5$s" href="%4$s">%1$s %2$s</a>',
+			impresscoder_get_icon_svg('ui', 'ticket', 22),
+			$text,
+			$class,
+			$link,
+			$target_link,
+		);
+
 
 		if($echo){
 			echo impresscoder_return_data($html);
@@ -925,3 +947,97 @@ if (!function_exists('impresscoder_parse_link_text')) {
 		return $text;
 	}
 }
+
+
+
+//global impresscoder impresscoder_get_post_meta
+function impresscoder_get_post_meta($key, $value, $echo = false)
+{
+	global $wp_query;
+	$post_id = $wp_query->get_queried_object_id();
+	$value = get_theme_mod($key, $value);
+	$post_types = ['post', 'page'];
+
+	if (is_singular($post_types) && metadata_exists('post', $post_id, $key)) {
+		$value = get_post_meta($post_id, $key, true);
+	}
+	if ($echo) {
+		echo wp_kses_post($value);
+	} else {
+		return $value;
+	}
+}
+
+
+// Category image taxtonomoy size
+if (!function_exists('impresscoder_category_image')) {
+    function impresscoder_category_image($term_id, $key, $size = 'full')
+    {
+        if (!function_exists('ctrlbp_meta') || empty($term_id) || empty($key)) return;
+
+        $cat_image_id = ctrlbp_meta($key, ['object_type' => 'post'], $term_id);
+
+        if (!empty($cat_image_id) && !is_wp_error($cat_image_id)) {
+            $cat_image = wp_get_attachment_image_src($cat_image_id, $size);
+            $cat_image_url = (!is_wp_error($cat_image) || !empty($cat_image)) ?  $cat_image[0] : '';
+        } else {
+            $cat_image_url = '';
+        }
+        return $cat_image_url;
+    }
+}
+
+
+add_filter('ctrlbp_meta_boxes', 'impresscoder_register_taxonomy_meta_boxes');
+function impresscoder_register_taxonomy_meta_boxes($meta_boxes)
+{
+    $meta_boxes[] = array(
+        'title'      => '',
+        'taxonomies' => 'category',
+        'fields' => array(
+            array(
+                'name' =>  esc_attr__('Category Image', 'genz'),
+                'id'   => 'category_image',
+                'type' => 'single_image',
+                'admin_columns' => array(
+                    'position' => 'after name',
+                    'title' => 'Image'
+                )
+            ),
+            // Category Template
+            // array(
+            //     'name' =>  esc_attr__('Category Template', 'genz'),
+            //     'id'   => 'cat_archive_template',
+            //     'type' => 'select',
+            //     'std'  =>   '',
+            //     'options' => array(
+            //         ''           => esc_attr__('Select Templete', 'genz'),
+            //         'style1'     => esc_attr__('Template Style 1', 'genz'),
+            //         'style2'     => esc_attr__('Template Style 2', 'genz'),
+            //         'style3'     => esc_attr__('Template Style 3', 'genz'),
+            //         'style4'     => esc_attr__('Template Style 4', 'genz'),
+            //         'style5'     => esc_attr__('Template Style 5', 'genz'),
+            //     )
+            // ),
+        ),
+    );
+
+    $meta_boxes[] = array(
+        'title'      => '',
+        'taxonomies' => ['post_tag', 'portfolio_cat'],
+        'fields' => array(
+            array(
+                'name' =>  esc_attr__('Image', 'genz'),
+                'id'   => 'tag_image',
+                'type' => 'single_image',
+                'admin_columns' => array(
+                    'position' => 'after name',
+                    'title' => 'Image'
+                )
+            ),
+        ),
+    );
+
+    return $meta_boxes;
+}
+

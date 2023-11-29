@@ -39,3 +39,17 @@ function pd_logout_menu_link( $menu_items, $args ) {
    }
    return $menu_items;
 }
+
+
+//Custom Menu
+function impresscoder_filter_nav_menu($args)
+{
+	if (is_page() && function_exists('rwmb_meta')) {
+		$custom_menu = rwmb_meta('custom_menu');
+
+		if (!empty($custom_menu) && !is_wp_error($custom_menu)) {
+			$args['menu'] = $custom_menu;
+		}
+	}
+	return $args;
+}

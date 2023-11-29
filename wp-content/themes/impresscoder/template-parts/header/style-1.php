@@ -6,10 +6,9 @@ $display_search_icon = get_theme_mod('enable_header_search', true);
 ?>
 <header <?php impresscoder_header_class(); ?>>
     <?php 
-    if(!$impresscoder->meta['disable_topbar']){
-      get_template_part('template-parts/header/topbar');
-    }
-     
+      if(!$impresscoder->meta['disable_topbar']){
+        get_template_part('template-parts/header/topbar');
+      }
     ?>
   
     <div class="container navbar-section">
@@ -41,6 +40,9 @@ $display_search_icon = get_theme_mod('enable_header_search', true);
                 'text' => get_theme_mod('nav_button_text', 'Subscribe'),
                 'link' => get_theme_mod('nav_button_link', '#'),
                 'class' => get_theme_mod('nav_button_style', 'btn-primary'),
+                'class' => get_theme_mod('nav_button_style', 'btn-primary'),
+                'extra_class' => get_theme_mod('button_extra_class', 'btn-rounded'),
+                'target_link' => get_theme_mod('button_target_link', false),
               ];
               $button = impresscoder_custom_button($button_args, false);
             }else{
@@ -52,7 +54,7 @@ $display_search_icon = get_theme_mod('enable_header_search', true);
             $search_icon = impresscoder_search_icon('d-none d-lg-inline-block', false);
                    
             // Right navbar
-            wp_nav_menu([
+            wp_nav_menu(impresscoder_filter_nav_menu([
                 'container_class' => 'offcanvas-body gap-15',
                 'menu_class' => 'navbar-nav align-items-xl-center primary-nav ms-xl-auto',
                 'theme_location' => 'primary',
@@ -61,7 +63,7 @@ $display_search_icon = get_theme_mod('enable_header_search', true);
                 'fallback_cb'    => 'Impresscoder\Nav_Walker::fallback',
                 'fallback_title'    => esc_attr__('Primary menu', 'impresscoder'),
                 'walker' => new Impresscoder\Nav_Walker()
-            ]);
+            ]));
             ?> 
            
         </div> 
