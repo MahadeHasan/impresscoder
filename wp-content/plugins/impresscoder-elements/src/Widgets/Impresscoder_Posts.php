@@ -90,7 +90,32 @@ class Impresscoder_Posts extends \Elementor\Widget_Base
 				'max' => 4
 			]
 		);
-		
+		$this->add_control(
+			'text_align',
+			[
+				'label' => esc_html__('Alignment', 'impresscoder-element'),
+				'type' => \Elementor\Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => esc_html__('Left', 'impresscoder-element'),
+						'icon' => 'eicon-text-align-left',
+					],
+					'center' => [
+						'title' => esc_html__('Center', 'impresscoder-element'),
+						'icon' => 'eicon-text-align-center',
+					],
+					'right' => [
+						'title' => esc_html__('Right', 'impresscoder-element'),
+						'icon' => 'eicon-text-align-right',
+					],
+				],
+				'default' => 'center',
+				'toggle' => true,
+				'selectors' => [
+					'{{WRAPPER}} .nav-alignment' => 'text-align: {{VALUE}};',
+				],
+			]
+		);
 		$this->end_controls_section();
 
 		$this->wp_query();

@@ -7,12 +7,18 @@ extract(wp_parse_args($args, [
     'disable_breadcrumbs' => impresscoder_get_post_meta('disable_breadcrumbs',false),
     'breadcrumbs_bg' => ''
 ]));
+
+
+if (!is_page()) {
+    $disable_banner = get_theme_mod('disable_banner', false);
+    $disable_breadcrumbs = get_theme_mod('disable_breadcrumb', false);
+}
 ?>
 <?php if(!$disable_banner): ?>
 <section <?php impresscoder_banner_class(); ?>>
     <div class="container pt-120">
         <?php 
-        the_archive_title('<h1 class="banner-title">', '</h1>');
+        the_archive_title('<h2 class="banner-title">', '</h2>');
         the_archive_description('<div class="banner-subtitle lead fw-normal">', '</div>');
         ?>
     </div>

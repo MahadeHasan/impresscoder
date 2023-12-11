@@ -386,8 +386,42 @@ final class Header{
 				'label'   => esc_html__( 'Enable sticky navbar', 'impresscoder' ),
 			)
 		);
+		//Disable Banner
+		$wp_customize->add_setting(
+			'disable_banner',
+			array(
+				'capability'        => 'edit_theme_options',
+				'default'           => true,
+				'sanitize_callback' => array(__NAMESPACE__ . '\\Customize', 'sanitize_checkbox'),
+			)
+		);
 
+		$wp_customize->add_control(
+			'disable_banner',
+			array(
+				'type'    => 'checkbox',
+				'section'       => 'header_image',
+				'label'   	    => esc_html__('Disable Banner?', 'impresscoder'),
+			)
+		);
+		//Disable Breadcrumbs
+		$wp_customize->add_setting(
+			'disable_breadcrumb',
+			array(
+				'capability'        => 'edit_theme_options',
+				'default'           => true,
+				'sanitize_callback' => array(__NAMESPACE__ . '\\Customize', 'sanitize_checkbox'),
+			)
+		);
 
+		$wp_customize->add_control(
+			'disable_breadcrumb',
+			array(
+				'type'    => 'checkbox',
+				'section'       => 'header_image',
+				'label'   	    => esc_html__('Disable Breadcrumb?', 'impresscoder'),
+			)
+		);
         // banner_bg_color
 		$wp_customize->add_setting(
 			'banner_bg_color',
@@ -419,6 +453,31 @@ final class Header{
 				),
             ) 
         );
+		
+		// Banner title
+		$wp_customize->add_setting(
+			'blog_title',
+			array(
+				'capability'        => 'edit_theme_options',
+				'default'           => esc_html__('Latest News', 'impresscoder'),
+				'sanitize_callback' => static function ($value) {
+					return esc_attr($value);
+				},
+			)
+		);
+		// Banner title
+		$wp_customize->add_control(
+			'blog_title',
+			array(
+				'type'            => 'text',
+				'section'         => 'header_image',
+				'label'           => esc_html__('Banner Title', 'impresscoder'),
+				'active_callback' => static function () {
+					return get_theme_mod('disable_banner', false) ? true : false;
+				}
+			)
+		);
+		
 
         // Banner image
 		$wp_customize->add_setting(
@@ -539,25 +598,33 @@ final class Header{
         
     }
     
-    public function get_the_archive_title($title){
-		if(is_search()){
-			return sprintf( 
-				__( 'Search Results for &#8220;%s&#8221;', 'impresscoder' ), 
-				get_search_query() 
+	public function get_the_archive_title($title)
+	{
+		if (is_search()) {
+			return sprintf(
+				__('Search Results for &#8220;%s&#8221;', 'impresscoder'),
+				get_search_query()
 			);
-		}
-		if(get_post_type() == 'post'){
+		} elseif (is_category()) {
+			$title = single_cat_title("", false);
+		} elseif (is_tag()) {
+			$title = single_tag_title("", false);
+		} elseif (is_author()) {
+			$title = '<span class="text-capitalize">' . get_the_author() . '</span>';
+		} elseif (is_post_type_archive()) {
+			$title  = post_type_archive_title('', false);
+		} elseif (get_post_type() == 'post') {
+			$title = get_theme_mod('blog_title', esc_attr__('Latest News', 'impresscoder'));
+		} elseif (function_exists('woocommerce_page_title') && get_post_type() == 'product') {
+			$title = woocommerce_page_title(false);
+		} elseif (is_singular()) {
+			$title = get_the_title();
+		} elseif (is_home()) {
 			$title = get_theme_mod('blog_title', esc_attr__('Latest News', 'impresscoder'));
 		}
-        elseif(is_singular()){
-            $title = get_the_title();
-        }
-        elseif(is_home()){
-            $title = get_theme_mod('blog_title', esc_attr__('Latest News', 'impresscoder'));  
-        }
-        
-        return $title;
-    }
+
+		return $title;
+	}
 
     public function get_the_archive_description($description){
         

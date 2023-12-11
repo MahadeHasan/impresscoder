@@ -203,6 +203,6 @@ trait Helper
 			'custom-btn2' => esc_html__('Theme style', 'impresscoder-element'),
 			'custom-btn item-btn' => esc_html__('Theme style 2', 'impresscoder-element'),
 		];
-		return apply_filters('control_events_button_style_class_options', $options);
+		return apply_filters('impresscoder_elements_button_style_class_options', $options);
 	}
 }

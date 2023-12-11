@@ -52,6 +52,11 @@ function impresscoder_register_required_plugins() {
 			'required'  		=> true
 		),
 		array(
+			'name'      		=> esc_attr(__('Control Block Patterns', 'impresscoder-elements')),
+			'slug'      		=> 'control-block-patterns',
+			'required'  		=> true
+		),
+		array(
 			'name' 				=> esc_attr(__('Contact form 7', 'impresscoder-elements')),
 			'slug' 				=> 'contact-form-7',
 			'required' 			=> false

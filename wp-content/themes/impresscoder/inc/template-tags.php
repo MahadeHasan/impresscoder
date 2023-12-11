@@ -315,7 +315,7 @@ add_filter('navigation_markup_template', function($template){
 	$template = '
 	<nav class="navigation %1$s" aria-label="%4$s">
 		<h2 class="screen-reader-text">%2$s</h2>
-		<div class="nav-links numeric-pagination d-lg-flex gap-10 justify-content-lg-between">%3$s</div>
+		<div class="nav-links numeric-pagination">%3$s</div>
 	</nav>';
 	return $template;
 });

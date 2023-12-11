@@ -30,7 +30,7 @@ extract(wp_parse_args($args, [
 			$img_size = !empty($args['img_size']) ? $args['img_size'] : 'full';
 			foreach ($categories as $category) : 
 				$count = $category->category_count;
-				print_r($count);
+				
 				$text = sprintf(_n('%s Article', '%s Articles', $count, 'impresscoder'), $count);
 				$cat_image = impresscoder_category_image($category->term_id, 'category_image', $img_size);
 

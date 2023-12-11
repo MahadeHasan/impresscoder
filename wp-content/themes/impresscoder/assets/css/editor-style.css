@@ -7801,7 +7801,7 @@ figcaption {
   display: inline-block;
   padding: 2px 10px;
   letter-spacing: 1px;
-  border-radius: 1px;
+  border-radius: 3px;
   display: none;
 }
 
@@ -7811,6 +7811,10 @@ figcaption {
 
 .listing-categories a:nth-child(-n+5) {
   display: inline-flex;
+}
+
+.wp-block-search__inside-wrapper {
+  display: flex;
 }
 
 .offcanvas.showing, .offcanvas.show {

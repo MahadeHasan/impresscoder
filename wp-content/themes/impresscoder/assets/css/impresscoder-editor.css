@@ -7862,7 +7862,7 @@ fieldset:disabled
   display: inline-block;
   padding: 2px 10px;
   letter-spacing: 1px;
-  border-radius: 1px;
+  border-radius: 3px;
   display: none;
 }
 
@@ -7872,6 +7872,10 @@ fieldset:disabled
 
 .editor-styles-wrapper .listing-categories a:nth-child(-n+5) {
   display: inline-flex;
+}
+
+.editor-styles-wrapper .wp-block-search__inside-wrapper {
+  display: flex;
 }
 
 .editor-styles-wrapper .offcanvas.showing, .editor-styles-wrapper .offcanvas.show {

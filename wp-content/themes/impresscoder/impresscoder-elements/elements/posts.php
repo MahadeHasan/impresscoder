@@ -50,20 +50,19 @@ if($post_query->have_posts()):
 				echo '<div class="row row-cols-1 row-cols-md-'.$column.'">';
 			}
 		}
-		//sectiion Title
+		//post template
 		while ($post_query->have_posts()) : $post_query->the_post();
-			get_template_part('template-parts/content/content', $template, [ 'column_class' => 'col mb-30' ]);
-		endwhile;
+			get_template_part('template-parts/content/content', $template, [ 'column_class' => 'col mb-4' ]);
+		endwhile; 
+		if($column > 1) echo '</div>';
 
 		//pagination 
 		if ($show_pagination == 'yes') : ?>
 			<nav class="mb-50 nav-alignment">
-				<?php echo stories_the_posts_navigation(); ?>
+				<?php echo impresscoder_the_posts_navigation(); ?>
 			</nav>
 		<?php endif; //pagination end
-		
-		if($column > 1) echo '</div>';
-		
+
 		//enable_sidebar condition start
 		if ($enable_sidebar && is_active_sidebar('sidebar-1')) :
 			echo '</div>';

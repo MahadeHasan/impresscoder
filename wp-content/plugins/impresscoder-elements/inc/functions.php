@@ -1,9 +1,9 @@
 <?php
 require_once __DIR__ . '/post-types.php';
-function control_events_option($option_id, $default = NULL)
+function impresscoder_elements_option($option_id, $default = NULL)
 {
 	$output = $default;
-	$options = get_option('control_events');
+	$options = get_option('impresscoder_elements');
 	if (isset($options[$option_id])) {
 		$output = $options[$option_id];
 	}
@@ -31,7 +31,7 @@ function control_events_option($option_id, $default = NULL)
 function impresscoder_framework_template_element($template_names, $load = false, $require_once = true, $args = array())
 {
 	$located = '';
-	$templates_dir = apply_filters('control_events/template_directory', '/elementor-IMPRESSCODER/');
+	$templates_dir = apply_filters('impresscoder_elements/template_directory', '/impresscoder-elements/');
 	foreach ((array) $template_names as $template_name) {
 		if (!$template_name) {
 			continue;
@@ -119,11 +119,12 @@ function impresscoder_framework_template($slug, $name = null, $args = array())
 		return false;
 	}
 }
+ 
 
 function elementor_impresscoder_content($content, $before = '', $after = '', $echo = true)
 {
 
-	if (strlen($content) == 0) {
+	if ($content == '') {
 		return;
 	}
 	$content = wp_kses_post(nl2br($content));
@@ -137,7 +138,7 @@ function elementor_impresscoder_content($content, $before = '', $after = '', $ec
 	}
 }
 
-function control_events_css_class($class, $before = '', $after = '', $echo = true)
+function impresscoder_elements_css_class($class, $before = '', $after = '', $echo = true)
 {
 	if (is_array($class)) {
 		$class = array_unique(array_filter($class));
@@ -159,7 +160,7 @@ function control_events_css_class($class, $before = '', $after = '', $echo = tru
 	}
 }
 
-function control_events_button_html($button, $prefix = '', $echo = true)
+function impresscoder_elements_button_html($button, $prefix = '', $echo = true)
 {
 	$button = wp_parse_args($button, [
 		$prefix . 'text' => 'Watch Video',
@@ -189,7 +190,7 @@ function control_events_button_html($button, $prefix = '', $echo = true)
 	}
 }
 
-function impresscoderelementor_get_sidebar_options()
+function impresscoder_elementor_get_sidebar_options()
 {
 	global $wp_registered_sidebars;
 	$options = [];
@@ -244,3 +245,5 @@ function impresscoder_elementor_get_image_sizes_options()
 
 	return $sizes;
 }
+
+
