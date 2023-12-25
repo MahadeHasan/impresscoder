@@ -7442,7 +7442,9 @@ html, body {
 body {
   overflow-x: hidden;
   --swiper-theme-color: var(--impresscoder-primary);
+  --impresscoder-headings-color: #0B2A55;
   display: flex;
+  --impresscoder-body-bg: var(--impresscoder-white);
   flex-direction: column;
   -ms-word-wrap: break-word;
   word-wrap: break-word;
@@ -7737,10 +7739,6 @@ figcaption {
 
 .list-unstyled .children {
   list-style: none;
-}
-
-.banner-subtitle p {
-  max-width: 768px;
 }
 
 .banner-subtitle p:last-child {
@@ -8604,12 +8602,6 @@ section.wp-block-cover-image > h2, section.wp-block-cover-image > .h2,
   .card-list .card-img-wrap .card-img-top {
     height: 100% !important;
   }
-}
-
-.section-title {
-  max-width: 768px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .section-title.text-start {

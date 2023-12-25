@@ -10,6 +10,7 @@
         type:'image'
     });
 
+
     $('.popup-youtube, .popup-vimeo, .popup-gmaps, .popup-video').magnificPopup({
         disableOn: 700,
         type: 'iframe',
@@ -168,19 +169,40 @@ $( document ).ready(function() {
 
   };
 
-  // if($('#geometry').length){
-  //   $(document).on('change', '#geometry', function(){
-  //       let mapField = $(this).closest('.rwmb-meta-box').find('#map');
-  //       if(mapField.length > 0){
-  //           mapField.val($(this).val()+',14').trigger('update');
-  //           $('#address_listing').trigger('update');
-  //       }
-  //       update();
-  //   });
-  // }
+
+    /*Data Fillter*/
+   	    // Project Isotope
+         $('.project-list').imagesLoaded(function() {
+	        // filter items on button click
+	        $('.project-menu').on('click', 'span', function() {
+	            var filterValue = $(this).attr('data-filter');
+	            $grid.isotope({
+	                filter: filterValue
+	            });
+	        });
+
+	        //init Isotope
+	        var $grid = $('.grid').isotope({
+	            itemSelector: '.grid-item',
+	            percentPosition: true,
+	            masonry: {
+	                // use outer width of grid-sizer for columnWidth
+	                columnWidth: '.grid-item',
+	            }
+	        });
+	    });
+
+	    //for menu active class
+	    $('.project-menu > span').on('click', function(event) {
+	        $(this).siblings('.active').removeClass('active');
+	        $(this).addClass('active');
+	        event.preventDefault();
+	    }); 
+
   
+  //new WOW().init();
   
-  // if('' !== CITYKID.backtoTop){
+  // if('' !== IMPRESSCODER.backtoTop){
   //   $.scrollUp();
   // }
   

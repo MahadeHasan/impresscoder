@@ -58,7 +58,7 @@ wp_enqueue_script('slick-js');
                         <?php while($post_query->have_posts()): $post_query->the_post(); ?>
                             <div class="slider-post-thumb mr-15 mt-3 position-relative">
                                 <div class="d-flex align-items-center hover-up-2 transition-normal">
-                                    <div class="post-thumb post-thumb-item d-flex mr-15 border-radius-5">
+                                    <div class="post-thumb post-thumb-item  d-flex mr-15 border-radius-5">
                                         <img class="border-radius-5" src="<?php the_post_thumbnail_url() ?>" alt="">
                                     </div>
                                     <div class="post-content media-body text-white">

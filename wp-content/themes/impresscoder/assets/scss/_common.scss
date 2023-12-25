@@ -6,13 +6,15 @@ html, body{
 }
 body{
     overflow-x: hidden;
-    --swiper-theme-color: var(--#{$prefix}primary);
+    --swiper-theme-color: var(--#{$prefix}primary); 
+    --#{$prefix}headings-color: #0B2A55; 
     display: flex;
+    --#{$prefix}body-bg : var(--#{$prefix}white);  
     flex-direction: column;
     -ms-word-wrap: break-word;
     word-wrap: break-word;
     padding-right: 0 !important;
-}
+} 
 .footer-section{
     margin-top: auto;
 }
@@ -265,8 +267,7 @@ figcaption{
     list-style: none;
 }
 .banner-subtitle{
-    p{
-        max-width: 768px;
+    p{ 
         &:last-child{
             margin-bottom: 0;
         }

@@ -7503,7 +7503,9 @@ fieldset:disabled
 .editor-styles-wrapper body {
   overflow-x: hidden;
   --swiper-theme-color: var(--impresscoder-primary);
+  --impresscoder-headings-color: #0B2A55;
   display: flex;
+  --impresscoder-body-bg: var(--impresscoder-white);
   flex-direction: column;
   -ms-word-wrap: break-word;
   word-wrap: break-word;
@@ -7798,10 +7800,6 @@ fieldset:disabled
 
 .editor-styles-wrapper .list-unstyled .children {
   list-style: none;
-}
-
-.editor-styles-wrapper .banner-subtitle p {
-  max-width: 768px;
 }
 
 .editor-styles-wrapper .banner-subtitle p:last-child {
@@ -8665,12 +8663,6 @@ fieldset:disabled
   .editor-styles-wrapper .card-list .card-img-wrap .card-img-top {
     height: 100% !important;
   }
-}
-
-.editor-styles-wrapper .section-title {
-  max-width: 768px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .editor-styles-wrapper .section-title.text-start {

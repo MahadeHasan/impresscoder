@@ -22,8 +22,9 @@ class Elementor
         $widgets_manager->register(new Widgets\Impresscoder_Brand());
         $widgets_manager->register(new Widgets\Impresscoder_Pricing_Tables());
         $widgets_manager->register(new Widgets\Impresscoder_Faqs());
-        $widgets_manager->register(new Widgets\Impresscoder_Services());
-        $widgets_manager->register(new Widgets\Impresscoder_Portfolio());
+        $widgets_manager->register(new Widgets\Services());
+        $widgets_manager->register(new Widgets\Portfolio());
+        //$widgets_manager->register(new Widgets\Impresscoder_Portfolio());
         $widgets_manager->register(new Widgets\Impresscoder_Category());
         $widgets_manager->register(new Widgets\Impresscoder_Post_Tags());
         $widgets_manager->register(new Widgets\Impresscoder_Banner_Tags());

@@ -119,9 +119,13 @@ trait Helper
 		}
 		$args = wp_parse_args($args, [
 			'prefix' => 'button_',
-			'text' => esc_html__('Resister Now', 'impresscoder-element'),
+			'text' => esc_html__('Buy Ticket Now', 'control-events'),
 			'url' => '#',
 			'style' => '',
+			'button_icon' => '',
+			'library_icon' => '',
+			'button_icon' => '',
+			'button_icon_position' => 'end',
 			'data' => '',
 			'extra_class' => '',
 		]);
@@ -129,7 +133,7 @@ trait Helper
 		$instance->add_control(
 			$args['prefix'] . 'text',
 			[
-				'label' => esc_html__('Button text', 'impresscoder-element'),
+				'label' => esc_html__('Button text', 'control-events'),
 				'type' => \Elementor\Controls_Manager::TEXT,
 				'default' => $args['text'],
 				'label_block' => true
@@ -138,7 +142,7 @@ trait Helper
 		$instance->add_control(
 			$args['prefix'] . 'url',
 			[
-				'label' => esc_html__('Button URL', 'impresscoder-element'),
+				'label' => esc_html__('Button URL', 'control-events'),
 				'type' => \Elementor\Controls_Manager::TEXT,
 				'default' => $args['url'],
 				'placeholder' => 'https://',
@@ -146,26 +150,65 @@ trait Helper
 			]
 		);
 		$instance->add_control(
-			$args['prefix'] . 'video',
-			[
-				'label' => esc_html__('Enable video popup', 'impresscoder-element'),
-				'type' => \Elementor\Controls_Manager::SWITCHER,
-			]
-		);
-		$instance->add_control(
 			$args['prefix'] . 'style',
 			[
-				'label' => esc_html__('Style', 'impresscoder-element'),
+				'label' => esc_html__('Button Style', 'control-events'),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'btn-link',
 				'options' => $this->button_style_class_options(),
+			]
+		);
+		$instance->add_control(
+			'button_icon',
+			[
+				'label' => esc_html__('Icon', 'control-events'),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'options'    => [
+					''    => 'None',
+					'ticket'    => 'Ticket',
+					'shop-icon-sm'    => 'Shoping Cart',
+					'contact-plus-icon'    => 'User',
+					'highlights-icon-1'    => 'Star',
+					'highlights-icon-2'    => 'Microphone',
+					'highlights-icon-3'    => 'Calendar',
+					'highlights-icon-4'    => 'Statistics',
+					'highlights-icon-5'    => 'Engage',
+					'arrow-up-right'    => 'Arrow up right',
+					'arrow-down-right'    => 'Arrow down right',
+					'custom'    => 'Custom',
+				],
+				'default'      =>  'ticket',
+			]
+		);
+
+		$instance->add_control(
+			'library_icon',
+			[
+				'label' => esc_html__('Choose Icon', 'control-events'),
+				'type' => \Elementor\Controls_Manager::ICONS,
+				'label_block' => true,
+				'ai'      => false,
+				'condition'    =>  ['button_icon'    => 'custom'],
+				//'default'      =>   'library_icon'
+			]
+		);
+		$instance->add_control(
+			'button_icon_position',
+			[
+				'label' => esc_html__('position', 'control-events'),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'options'    => [
+					'start'    => 'Start',
+					'end'    => 'End',
+				],
+				'default'      =>  $args['button_icon_position'],
 			]
 		);
 
 		$instance->add_control(
 			$args['prefix'] . 'extra_class',
 			[
-				'label' => esc_html__('CSS Classes', 'impresscoder-element'),
+				'label' => esc_html__('CSS Classes', 'control-events'),
 				'type' => \Elementor\Controls_Manager::TEXT,
 				'default' => $args['extra_class'],
 				'label_block' => true
@@ -174,13 +217,12 @@ trait Helper
 		$instance->add_control(
 			$args['prefix'] . 'data',
 			[
-				'label' => esc_html__('Data Attributes', 'impresscoder-element'),
+				'label' => esc_html__('Data Attributes', 'control-events'),
 				'type' => \Elementor\Controls_Manager::TEXT,
 				'label_block' => true
 			]
 		);
 	}
-
 
 	protected function render_button($args = [])
 	{
