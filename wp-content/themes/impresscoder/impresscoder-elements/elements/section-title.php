@@ -1,6 +1,7 @@
 <?php
 extract(wp_parse_args($args, [
     'title'              => '',
+    'title_tag'              => '',
     'description'       => '',
 
 ]));

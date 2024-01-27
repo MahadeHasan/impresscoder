@@ -1,6 +1,8 @@
 <?php
 extract(wp_parse_args( $args, [ 
     'image_size' => 'post-thumbnail', 
+    'excerpt_length' => 50,
+    
 ])); ?>
 <div <?php post_class('mb-4') ?>>
      <div class="card shadow-hover post-card-1 border-radius-10 hover-up card-post">
@@ -41,7 +43,7 @@ extract(wp_parse_args( $args, [
             <?php else: ?>
                 <div class="entry-content">
                         <?php 
-                        the_content(); 
+                        the_excerpt(); 
                         wp_link_pages(
                                 array(
                                         'before'   => '<nav class="page-links numeric-pagination d-lg-flex gap-10 " aria-label="' . esc_attr__( 'Page', 'impresscoder' ) . '">',

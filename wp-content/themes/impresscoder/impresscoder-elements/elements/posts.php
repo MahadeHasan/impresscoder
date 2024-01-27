@@ -1,6 +1,7 @@
 <?php
 extract(wp_parse_args($args, [
 	'title' => esc_attr__('Latest Posts', 'stories'),
+	'excerpt_length' => 50,
 	'template' => '',
 	'column' => 1,
 	'layout' => 'rs',
@@ -52,7 +53,7 @@ if($post_query->have_posts()):
 		}
 		//post template
 		while ($post_query->have_posts()) : $post_query->the_post();
-			get_template_part('template-parts/content/content', $template, [ 'column_class' => 'col mb-4' ]);
+			get_template_part('template-parts/content/content', $template, [ 'column_class' => 'col mb-4' ], $excerpt_length);
 		endwhile; 
 		if($column > 1) echo '</div>';
 

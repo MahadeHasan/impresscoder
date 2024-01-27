@@ -35,31 +35,40 @@ class Posts extends \Elementor\Widget_Base
 		$this->start_controls_section(
 			'section_title',
 			[
-				'label' => esc_html__('Posts', 'stories-elements'),
+				'label' => esc_html__('Posts', 'impresscoder-element'),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
 		$this->add_control(
 			'title',
 			[
-				'label' => esc_html__('Title', 'stories-elements'),
+				'label' => esc_html__('Title', 'impresscoder-element'),
 				'type' => \Elementor\Controls_Manager::TEXT,
 				'label_block' => true,
-				'default' => esc_html__('Latest Posts', 'stories-elements'),
+				'default' => esc_html__('Latest Posts', 'impresscoder-element'),
+			]
+		);
+		$this->add_control(
+			'excerpt_length',
+			[
+				'label' => esc_html__('Excerpt Length', 'impresscoder-element'),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'label_block' => true,
+				'default' => 50,
 			]
 		);
 
 		$this->add_control(
 			'template',
 			[
-				'label' => esc_html__('Content style', 'stories-elements'),
+				'label' => esc_html__('Content style', 'impresscoder-element'),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'label_block' => true,
 				'default' => '',
 				'options' => [
-					'' => esc_html__('List View', 'stories-elements'),
-					'grid' => esc_html__('Grid View', 'stories-elements'),
-					'masonry' => esc_html__('Masonry View', 'stories-elements'),
+					'' => esc_html__('List View', 'impresscoder-element'),
+					'grid' => esc_html__('Grid View', 'impresscoder-element'),
+					'masonry' => esc_html__('Masonry View', 'impresscoder-element'),
 				],
 			]
 		);
@@ -67,14 +76,14 @@ class Posts extends \Elementor\Widget_Base
 		$this->add_control(
 			'layout',
 			[
-				'label' => esc_html__('Layout', 'stories-elements'),
+				'label' => esc_html__('Layout', 'impresscoder-element'),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'label_block' => true,
 				'default' => 'rs',
 				'options' => [
-					'full' => esc_html__('No sidebar', 'stories-elements'),
-					'ls' => esc_html__('Left Sidebar', 'stories-elements'),
-					'rs' => esc_html__('Right Sidebar', 'stories-elements'),
+					'full' => esc_html__('No sidebar', 'impresscoder-element'),
+					'ls' => esc_html__('Left Sidebar', 'impresscoder-element'),
+					'rs' => esc_html__('Right Sidebar', 'impresscoder-element'),
 				],
 			]
 		);
@@ -82,7 +91,7 @@ class Posts extends \Elementor\Widget_Base
 		$this->add_control(
 			'column',
 			[
-				'label' => esc_html__('Posts column', 'stories-elements'),
+				'label' => esc_html__('Posts column', 'impresscoder-element'),
 				'type' => \Elementor\Controls_Manager::NUMBER,
 				'default' => '1',
 				'min' => 1,
