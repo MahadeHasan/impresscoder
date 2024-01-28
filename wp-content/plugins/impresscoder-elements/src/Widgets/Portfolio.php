@@ -35,7 +35,7 @@ class Portfolio extends \Elementor\Widget_Base
 
 	protected function register_controls()
 	{
-
+		$prefix = 'portfolio_';
 		// Portfolio Features Tab Start  
 		$this->start_controls_section(
 			'portfolio_tab',
@@ -47,26 +47,22 @@ class Portfolio extends \Elementor\Widget_Base
 		$this->add_control(
 			'select_portfolio_colum',
 			[
-				'label' => esc_html__('Select Portfolio Column ', 'impresscoder-element'),
+				'label' => esc_html__('Number of Portfolio Column ', 'impresscoder-element'),
 				'type' => \Elementor\Controls_Manager::NUMBER,
-				'default' => 3, 
-				'label_block'	=> true,
+				'default' => 3,  
 			]
-		);
+		); 
 		$this->add_control(
-			'posts_per_page',
+			'portfolio_per_page',
 			[
 				'label' => esc_html__('Portfolio per page', 'impresscoder-element'),
-				'type' => \Elementor\Controls_Manager::NUMBER,
-				'label_block' => true,
-				'default' => get_option('posts_per_page', 6),
-				'min' => -1,
-				'step' => 1,
-				'max' => 10
+				'type' => \Elementor\Controls_Manager::NUMBER, 
+				'default' => get_option('posts_per_page', 6), 
 			]
 		);
+	
 		$this->add_control(
-			'order',
+			$prefix . 'order',
 			[
 				'label' => esc_html__('Post order', 'impresscoder-element'),
 				'type' => \Elementor\Controls_Manager::SELECT,
@@ -78,7 +74,7 @@ class Portfolio extends \Elementor\Widget_Base
 			]
 		);
 		$this->add_control(
-			'orderby',
+			$prefix . 'orderby',
 			[
 				'label' => esc_html__('Post order by', 'impresscoder-element'),
 				'type' => \Elementor\Controls_Manager::SELECT,
@@ -95,7 +91,7 @@ class Portfolio extends \Elementor\Widget_Base
 			]
 		);
 		$this->add_control(
-			'post__in',
+			$prefix . 'post__in',
 			[
 				'label' => esc_html__('Specify posts to retrieve', 'impresscoder-element'),
 				'type' => \Elementor\Controls_Manager::SELECT2,
@@ -106,7 +102,7 @@ class Portfolio extends \Elementor\Widget_Base
 		);
 
 		$this->add_control(
-			'category__in',
+			$prefix . 'category__in',
 			[
 				'label' => esc_html__('Specify category to retrieve', 'impresscoder-element'),
 				'type' => \Elementor\Controls_Manager::SELECT2,
@@ -115,6 +111,35 @@ class Portfolio extends \Elementor\Widget_Base
 				'multiple' => true,
 			]
 		); 
+		$this->add_control(
+			$prefix . 'posts_per_page',
+			[
+				'label' => esc_html__('Posts per page', 'impresscoder-element'),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'min' => '-1',
+				'step' => '1',
+				'max' => '50',
+				'default' => 6
+			]
+		);
+		$this->add_control(
+			$prefix . 'preview_text',
+			[
+				'label' => esc_html__('Preview Text', 'impresscoder-element'),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'label_block' => true,
+				'default' => esc_html__('Live Preview', 'impresscoder-element'),
+			]
+		);
+		// $this->add_control(
+		// 	$prefix . 'preview_link',
+		// 	[
+		// 		'label' => esc_html__('Preview Link', 'impresscoder-element'),
+		// 		'type' => \Elementor\Controls_Manager::TEXT,
+		// 		'label_block' => true,
+		// 		'default' => '#',
+		// 	]
+		// );
 		$this->end_controls_section();
 
 		//section_title_alignment

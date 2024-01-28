@@ -44,35 +44,41 @@
 
  
 
-  // A $( document ).ready() block.
-$( document ).ready(function() { 
-      // featured slider  
-      $('.post-sliders-activation').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: true,
-        dots: false,
-        fade: true,
-        loop: false,
-        asNavFor: '.featured-slider-nav',
-        prevArrow: '<span class="slick-prev"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/></svg></span>',
-        nextArrow: '<span class="slick-next"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/></svg></span>',
-        appendArrows: '.arrow-cover-2',
-    });   
+ // A $( document ).ready() block.
+ 
+  function post_sliders_activation(){ 
+    // featured slider  
+    $('.post_sliders_activation').slick({
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: true,
+          dots: false,
+          fade: true,
+          loop: false,
+          asNavFor: '.featured-slider-nav',
+          prevArrow: '<span class="slick-prev"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/></svg></span>',
+          nextArrow: '<span class="slick-next"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/></svg></span>',
+          appendArrows: '.arrow-cover-2',
+    }); 
+
     $('.featured-slider-nav').slick({
         slidesToShow: $('.featured-slider-nav').data('slides-show'),
         slidesToScroll: 1,
         vertical: true, 
         loop: false,
-        asNavFor: '.post-sliders-activation',
+        asNavFor: '.post_sliders_activation',
         dots: false,
         arrows: false,
         focusOnSelect: true,
         verticalSwiping: true
     });
 
-}); 
-  if ($('.swiper-category-sliders').length > 0) {
+};
+
+
+
+
+if ($('.swiper-category-sliders').length > 0) {
       new Swiper(".swiper-category-sliders", {
       spaceBetween: 16, 
       slidesPerGroup: 1,
@@ -110,6 +116,26 @@ $( document ).ready(function() {
       }
   });
 }
+
+// portfolio swiper slider
+  $(".portfolio-swiper-slides").each(function () {
+    var swiper_1_items = new Swiper(this, {
+        slidesPerView: 1,
+        slidesPerGroup: 1,
+        autoplay: false, 
+        loop: false,
+        simulateTouch: true,
+        pauseOnMouseEnter: false,
+        // autoplay: {
+        //     delay: 2000
+        // },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true
+        },
+    });
+  });
+
 
     /*----------------------------------------------------*/
   /*  ScrollUp
@@ -169,35 +195,22 @@ $( document ).ready(function() {
 
   };
 
+ 
+/*Data Fillter*/  
 
-    /*Data Fillter*/
-   	    // Project Isotope
-         $('.project-list').imagesLoaded(function() {
-	        // filter items on button click
-	        $('.project-menu').on('click', 'span', function() {
-	            var filterValue = $(this).attr('data-filter');
-	            $grid.isotope({
-	                filter: filterValue
-	            });
-	        });
+  $('.grid').isotope({
+      itemSelector: '.grid-item',
+  });
+  
+  // filter items on button click
+$('.filter-button-group').on('click', 'li', function() {
+    var filterValue = $(this).attr('data-filter');
+    $('.grid').isotope({ filter: filterValue });
+    $('.filter-button-group li').removeClass('active');
+    $(this).addClass('active');
+});
 
-	        //init Isotope
-	        var $grid = $('.grid').isotope({
-	            itemSelector: '.grid-item',
-	            percentPosition: true,
-	            masonry: {
-	                // use outer width of grid-sizer for columnWidth
-	                columnWidth: '.grid-item',
-	            }
-	        });
-	    });
 
-	    //for menu active class
-	    $('.project-menu > span').on('click', function(event) {
-	        $(this).siblings('.active').removeClass('active');
-	        $(this).addClass('active');
-	        event.preventDefault();
-	    }); 
 
   
   //new WOW().init();
@@ -205,6 +218,10 @@ $( document ).ready(function() {
   // if('' !== IMPRESSCODER.backtoTop){
   //   $.scrollUp();
   // }
+
+ 
+
+
   
   
 }( jQuery ) );

@@ -15,20 +15,22 @@ get_header();
 
 get_template_part('template-parts/content/before'); ?>
 
+<div class="col-xl-10 col-lg-12 mx-auto">
 
+	<div class="border-gray-800 pb-20">
+		<?php get_template_part('template-parts/header/breadcrumbs'); ?>
+	</div>
 
-<div class="pt-30 border-bottom border-gray-800 pb-20">
-	<?php get_template_part('template-parts/common/breadcrumb'); ?>
+	<?php
+	/* Start the Loop */
+	while (have_posts()) :
+		the_post();
+		get_template_part('template-parts/project/content-single');
+
+	endwhile; ?>
 </div>
 
 <?php
-/* Start the Loop */
-while (have_posts()) :
-	the_post();
-	get_template_part('template-parts/portfolio/content-single');
-
-endwhile;
-
 get_template_part('template-parts/content/after');
 
 get_footer();

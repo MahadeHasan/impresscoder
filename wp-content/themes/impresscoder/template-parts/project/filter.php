@@ -1,17 +1,16 @@
 <?php
 $terms =  get_terms('portfolio_cat');
 if (empty($terms)) return;
-?> 
-<ul class="project-menu container justify-content-center">
-    <li class="active">
-        <span data-filter=""><?php echo esc_attr__('All', 'genz') ?></span>
-    </li>
+?>
+
+<div class="button-group filter-button-group mb-4 text-center">
+    <li class="btn btn-outline-primary rounded-1 me-2 mb-2 active" data-filter="*"><?php echo esc_attr__('All', 'Impresscoder') ?></li>
     <?php
     //print_r($terms);
     foreach ($terms as $term) { ?>
-        <li class="" data-wow-delay=".1s">
-            <span data-filter="<?php echo esc_attr($term->slug) ?>"><?php echo esc_attr($term->name) ?></span>
-        </li>
+        <li class="btn btn-outline-primary rounded-1 me-2 mb-2" data-filter=".<?php echo esc_attr($term->slug) ?>"><?php echo esc_attr($term->name) ?></li> 
+
     <?php }
-    ?> 
-</ul>
+    ?>  
+</div>
+ 

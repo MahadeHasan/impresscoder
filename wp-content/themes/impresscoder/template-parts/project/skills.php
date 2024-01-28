@@ -1,1 +1,14 @@
-<?php echo get_the_term_list(get_the_ID(), 'portfolio_skill', '<div class="box-tags wow animate__animated animate__fadeIn"><span class="btn btn-tags bg-gray-850 border-gray-800 mr-10 hover-up">', '</span><span class="btn btn-tags bg-gray-850 border-gray-800 mr-10 hover-up">', '</span></div>');
+<?php  
+$skills_title = get_post_meta(get_the_ID(), 'skills_title', true);
+$terms =  get_terms('portfolio_skill');
+if (empty($terms)) return;
+?> 
+<div class="project-skills">
+    <h3 class="mt-50 mb-30"><?php echo esc_attr($skills_title) ?></h3>
+    <?php
+    //print_r($terms);
+    foreach ($terms as $term) { ?> 
+            <span class="btn btn-outline-primary me-2 mb-2" style="cussor: auto;"><?php echo esc_attr($term->name) ?></span>
+    <?php }
+    ?>
+</div>

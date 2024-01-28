@@ -30,7 +30,7 @@ wp_enqueue_script('slick-js');
 
 <?php if($post_query->have_posts()): ?> 
         <div class="posts-slider featured-sliders">
-            <div class="featured-slider-items post-sliders-activation"> 
+            <div class="featured-slider-items post-sliders-activation post_sliders_activation"> 
                 <?php while($post_query->have_posts()): $post_query->the_post(); ?>
                     <div class="slider-single">
                         <div class="post-thumb position-relative">
