@@ -13,8 +13,8 @@ if( !function_exists('impresscoder_enqueue_assets') ){
 		//swiper slider css
 		wp_enqueue_style('swiper-bundle', get_theme_file_uri('assets/swiper/swiper-bundle.min.css'), false, '8.4.5');
 		//slick slider css
-		wp_register_style('slick', get_theme_file_uri('assets/slick/slick.css'), [], '1.0.0');
-		wp_register_style('slicknav', get_theme_file_uri('assets/slick/slicknav.css'), [], '1.0.0');
+		wp_enqueue_style('slick', get_theme_file_uri('assets/slick/slick.css'), [], '1.0.0');
+		wp_enqueue_style('slicknav', get_theme_file_uri('assets/slick/slicknav.css'), [], '1.0.0');
 		
 
 		$suffix = is_rtl()? '.rtl' : '';
@@ -30,15 +30,14 @@ if( !function_exists('impresscoder_enqueue_assets') ){
         wp_enqueue_script('bootstrap-bundle', get_theme_file_uri('assets/bootstrap/dist/js/bootstrap.bundle.min.js'), [], '5.0.3', true);
         wp_enqueue_script('magnific-popup', get_theme_file_uri('assets/js/jquery.magnific-popup.min.js'), ['jquery'], '5.0.3', true);
 
+		wp_enqueue_script('isotope-js', get_theme_file_uri('assets/js/isotope.min.js'),['jquery'], '1.1.3', true); 		
 		wp_enqueue_script('swiper-bundle', get_theme_file_uri('assets/swiper/swiper-bundle.min.js'), false , '8.4.5', true);
 
 		//slick slider js
-		//wp_register_script('slicknav-js', get_theme_file_uri('assets/slick/jquery.slicknav.js'), ['jquery'], '5.0.3', true);
-		wp_register_script('slick-js', get_theme_file_uri('assets/slick/slick.min.js'), ['jquery'], '5.0.3', true);
+		wp_enqueue_script('slicknav-js', get_theme_file_uri('assets/slick/jquery.slicknav.js'), ['jquery'], '5.0.3', false);
+		wp_enqueue_script('slick-js', get_theme_file_uri('assets/slick/slick.min.js'), ['jquery'], '5.0.3', false);
 
-		
-
-        wp_enqueue_script('impresscoder-main', get_theme_file_uri('assets/js/main.js'), ['jquery', 'jquery-masonry'], '5.0.0', true);
+        wp_enqueue_script('impresscoder-main', get_theme_file_uri('assets/js/main.js'), ['jquery', 'jquery-masonry', 'swiper-bundle',], '5.0.0', true);
         wp_enqueue_script('impresscoder-menu', get_theme_file_uri('assets/js/menu.js'), ['jquery'], '5.0.0', true);
 		$l10n = [
 			'stikyNavbar' => get_theme_mod('sticky_navbar', true),
@@ -1041,3 +1040,54 @@ function impresscoder_register_taxonomy_meta_boxes($meta_boxes)
     return $meta_boxes;
 }
 
+
+// impresscoder_get_the_term_list
+function impresscoder_get_the_term_list($post_id, $taxonomy, $before = '', $sep = '', $after = '', $link_html = true)
+{
+    $terms = get_the_terms($post_id, $taxonomy);
+
+    if (is_wp_error($terms)) {
+        return $terms;
+    }
+
+    if (empty($terms)) {
+        return false;
+    }
+
+    $links = array();
+
+    foreach ($terms as $term) {
+        $link = get_term_link($term, $taxonomy);
+        if (is_wp_error($link)) {
+            return $link;
+        }
+        $links[] = $link_html ? '<a href="' . esc_url($link) . '" rel="tag">' . $term->name . '</a>' : $term->slug;
+    }
+
+    /**
+     * Filters the term links for a given taxonomy.
+     *
+     * The dynamic portion of the hook name, `$taxonomy`, refers
+     * to the taxonomy slug.
+     *
+     * Possible hook names include:
+     *
+     *  - `term_links-category`
+     *  - `term_links-post_tag`
+     *  - `term_links-post_format`
+     *
+     * @since 2.5.0
+     *
+     * @param string[] $links An array of term links.
+     */
+    $term_links = apply_filters("impresscoder_term_links-{$taxonomy}", $links);  // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+
+    return $before . implode($sep, $term_links) . $after;
+}
+
+if (!function_exists('impresscoder_return_data')) {
+    function impresscoder_return_data($data)
+    {
+        return $data;
+    }
+}

@@ -71,6 +71,9 @@ $( document ).ready(function() {
     });
 
 }); 
+
+
+
   if ($('.swiper-category-sliders').length > 0) {
       new Swiper(".swiper-category-sliders", {
       spaceBetween: 16, 
@@ -110,6 +113,25 @@ $( document ).ready(function() {
   });
 }
 
+
+if ($('.portfolio-swiper-slides').length > 0) {
+  // portfolio swiper slider
+  new Swiper(".portfolio-swiper-slides", {
+          slidesPerView: 1,
+          slidesPerGroup: 1,
+          autoplay: false, 
+          loop: false,
+          simulateTouch: true,
+          pauseOnMouseEnter: false,
+          // autoplay: {
+          //     delay: 2000
+          // },
+          pagination: {
+              el: ".swiper-pagination",
+              clickable: true
+          },
+      });
+    };
     /*----------------------------------------------------*/
   /*  ScrollUp
   /*----------------------------------------------------*/  
@@ -167,22 +189,20 @@ $( document ).ready(function() {
     });
 
   };
+ 
 
-  // if($('#geometry').length){
-  //   $(document).on('change', '#geometry', function(){
-  //       let mapField = $(this).closest('.rwmb-meta-box').find('#map');
-  //       if(mapField.length > 0){
-  //           mapField.val($(this).val()+',14').trigger('update');
-  //           $('#address_listing').trigger('update');
-  //       }
-  //       update();
-  //   });
-  // }
-  
-  
-  // if('' !== CITYKID.backtoTop){
-  //   $.scrollUp();
-  // }
-  
+/*Data Fillter*/  
+$('.portfolio-grid').isotope({
+  itemSelector: '.grid-item',
+});
+
+  // filter items on button click
+  $('.filter-button-group').on('click', 'li', function() {
+  var filterValue = $(this).attr('data-filter');
+  $('.portfolio-grid').isotope({ filter: filterValue });
+  $('.filter-button-group li').removeClass('active');
+  $(this).addClass('active');
+  });
+
   
 }( jQuery ) );

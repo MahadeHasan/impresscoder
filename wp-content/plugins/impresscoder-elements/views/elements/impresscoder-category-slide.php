@@ -62,5 +62,50 @@ extract(wp_parse_args($args, [
 	<div class="swiper-button-next swiper-button-next-style-2"></div>
 </div>
  
+
+<script>
+	
+	(function($) {
+		
+	if ($('.swiper-category-sliders').length > 0) {
+		new Swiper(".swiper-category-sliders", {
+			spaceBetween: 16, 
+			slidesPerGroup: 1,
+			loop: $('.swiper-category-sliders').data('loop'),
+			navigation: {
+				nextEl: ".swiper-button-next-style-2",
+				prevEl: ".swiper-button-prev-style-2"
+			},
+
+			autoplay: {
+				delay: 10000
+			},
+			breakpoints: {
+				1500: {
+					slidesPerView: $('.swiper-category-sliders').data('slide-xxl'),
+				},
+				1200: {
+					slidesPerView: $('.swiper-category-sliders').data('slide-lg')
+				},
+				768: {
+					slidesPerView: $('.swiper-category-sliders').data('slide-md')
+				},
+				600: {
+					slidesPerView: 3
+				},
+				440: {
+					slidesPerView: 2
+				},
+				300: {
+					slidesPerView: 1
+				},
+				200: {
+					slidesPerView: 1
+				}
+			}
+		});
+	}
+})(jQuery);
+</script>
     <!-- row --> 
 <!-- box-topics -->

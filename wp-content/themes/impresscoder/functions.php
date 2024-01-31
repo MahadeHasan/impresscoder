@@ -7,6 +7,10 @@ define( 'IMPRESSCODER_ADMIN_ASSETS', IMPRESSCODER_URI.'/assets/admin' );
 
 include __DIR__ .'/vendor/autoload.php';
 
+
+
+require get_template_directory() . '/inc/portfolio-meta-fields.php';
+
 new Impresscoder\Loader();
 
 
