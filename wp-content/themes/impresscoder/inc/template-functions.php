@@ -18,8 +18,7 @@ if( !function_exists('impresscoder_enqueue_assets') ){
 		
 
 		$suffix = is_rtl()? '.rtl' : '';
-        wp_enqueue_style('magnific-popup', get_theme_file_uri('assets/css/magnific-popup.css'), [], '1.0.0'); 
-		wp_enqueue_style('animate', get_theme_file_uri('assets/css/animate.min.css'), [], '4.1.1');
+        wp_enqueue_style('magnific-popup', get_theme_file_uri('assets/css/magnific-popup.css'), [], '1.0.0');
         wp_enqueue_style('impresscoder-icons', get_theme_file_uri('assets/css/impresscoder-icons.css'), [], '1.0.0');
         wp_enqueue_style('impresscoder', get_theme_file_uri('assets/css/impresscoder'.$suffix.'.css'), [], '1.0.0');
 
@@ -31,7 +30,6 @@ if( !function_exists('impresscoder_enqueue_assets') ){
         wp_enqueue_script('bootstrap-bundle', get_theme_file_uri('assets/bootstrap/dist/js/bootstrap.bundle.min.js'), [], '5.0.3', true);
         wp_enqueue_script('magnific-popup', get_theme_file_uri('assets/js/jquery.magnific-popup.min.js'), ['jquery'], '5.0.3', true);
 
-		wp_enqueue_script('isotope-js', get_theme_file_uri('assets/js/isotope.min.js'),['jquery'], '1.1.3', true);
 		wp_enqueue_script('swiper-bundle', get_theme_file_uri('assets/swiper/swiper-bundle.min.js'), false , '8.4.5', true);
 
 		//slick slider js
@@ -1043,77 +1041,3 @@ function impresscoder_register_taxonomy_meta_boxes($meta_boxes)
     return $meta_boxes;
 }
 
-
-//Category image
-function impresscoder_list_cats($output, $category)
-{
-    if (empty($category) || $category == null) return;
-    if (!is_admin()) {
-        $attachment_id = impresscoder_get_term_meta($category->term_id, 'category_image');
-        $image_url = wp_get_attachment_image_url($attachment_id, 'thumbnail');
-        if (!empty($image_url)) {
-            $output = '<div class="d-inline-flex  align-items-center gap-2"><img class="rounded-circle" src="' . esc_url($image_url) . '" width="32" height="32" alt="' . esc_attr($category->name) . '">' . $output . '</div>';
-        }
-    }
-    return $output;
-}
-add_filter('list_cats', 'impresscoder_list_cats', 10, 2);
-
-function impresscoder_get_term_meta($term_id, $meta_key, $default = NULL)
-{
-    if (!function_exists('ctrlbp_meta')) return $default;
-    return ctrlbp_meta($meta_key, ['object_type' => 'taxonomy'], $term_id);
-}
-
-
-
-// impresscoder_get_the_term_list
-function impresscoder_get_the_term_list($post_id, $taxonomy, $before = '', $sep = '', $after = '', $link_html = true)
-{
-    $terms = get_the_terms($post_id, $taxonomy);
-
-    if (is_wp_error($terms)) {
-        return $terms;
-    }
-
-    if (empty($terms)) {
-        return false;
-    }
-
-    $links = array();
-
-    foreach ($terms as $term) {
-        $link = get_term_link($term, $taxonomy);
-        if (is_wp_error($link)) {
-            return $link;
-        }
-        $links[] = $link_html ? '<a href="' . esc_url($link) . '" rel="tag">' . $term->name . '</a>' : $term->slug;
-    }
-
-    /**
-     * Filters the term links for a given taxonomy.
-     *
-     * The dynamic portion of the hook name, `$taxonomy`, refers
-     * to the taxonomy slug.
-     *
-     * Possible hook names include:
-     *
-     *  - `term_links-category`
-     *  - `term_links-post_tag`
-     *  - `term_links-post_format`
-     *
-     * @since 2.5.0
-     *
-     * @param string[] $links An array of term links.
-     */
-    $term_links = apply_filters("impresscoder_term_links-{$taxonomy}", $links);  // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
-
-    return $before . implode($sep, $term_links) . $after;
-}
-
-if (!function_exists('impresscoder_return_data')) {
-    function impresscoder_return_data($data)
-    {
-        return $data;
-    }
-}

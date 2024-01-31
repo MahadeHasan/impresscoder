@@ -10,8 +10,6 @@ include __DIR__ .'/vendor/autoload.php';
 new Impresscoder\Loader();
 
 
-require get_template_directory() . '/inc/portfolio-meta-fields.php';
-
 if ( ! function_exists( 'impresscoder_after_setup_theme' ) ) {
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
@@ -69,7 +67,6 @@ if ( ! function_exists( 'impresscoder_after_setup_theme' ) ) {
 		add_image_size( 'impresscoder-450x350-cropped', 450, 350, true );
 		add_image_size( 'impresscoder-750x320-cropped', 750, 320, true );
 		add_image_size( 'impresscoder-1920x600-cropped', 1920, 600, true );
-		add_image_size( 'impresscoder-1200x400-cropped', 1200, 450, true );
 
 		register_nav_menus(
 			array(
@@ -211,7 +208,6 @@ if(!function_exists('impresscoder_register_block_patterns')){
 	add_action( 'init', 'impresscoder_register_block_patterns' );
 }
 
-// comment thread
 function impresscoder_enqueue_comments_reply() {
 	if( get_option( 'thread_comments' ) )  {
 		wp_enqueue_script( 'comment-reply' );

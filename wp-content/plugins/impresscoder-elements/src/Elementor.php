@@ -17,21 +17,21 @@ class Elementor
     {
         $widgets_manager->register(new Widgets\Slider());
         $widgets_manager->register(new Widgets\Impresscoder_Section_Title());
-        $widgets_manager->register(new Widgets\About_Us());
-        $widgets_manager->register(new Widgets\Impresscoder_Testimonials());
-        $widgets_manager->register(new Widgets\Impresscoder_Brand());
-        $widgets_manager->register(new Widgets\Impresscoder_Pricing_Tables());
-        $widgets_manager->register(new Widgets\Impresscoder_Faqs());
+        //$widgets_manager->register(new Widgets\About_Us());
+        //$widgets_manager->register(new Widgets\Impresscoder_Testimonials());
+        // $widgets_manager->register(new Widgets\Impresscoder_Brand());
+        // $widgets_manager->register(new Widgets\Impresscoder_Pricing_Tables());
+        // $widgets_manager->register(new Widgets\Impresscoder_Faqs());
         $widgets_manager->register(new Widgets\Services());
         $widgets_manager->register(new Widgets\Portfolio());
         //$widgets_manager->register(new Widgets\Impresscoder_Portfolio());
         $widgets_manager->register(new Widgets\Impresscoder_Category());
-        $widgets_manager->register(new Widgets\Impresscoder_Post_Tags());
-        $widgets_manager->register(new Widgets\Impresscoder_Banner_Tags());
-        $widgets_manager->register(new Widgets\Impresscoder_Banner_Category());
-        $widgets_manager->register(new Widgets\Impresscoder_Posts());
-        $widgets_manager->register(new Widgets\Impresscoder_Author_Banner());
-        $widgets_manager->register(new Widgets\Impresscoder_Contact_Info());
+        // $widgets_manager->register(new Widgets\Impresscoder_Post_Tags());
+        // $widgets_manager->register(new Widgets\Impresscoder_Banner_Tags());
+        // $widgets_manager->register(new Widgets\Impresscoder_Banner_Category());
+        $widgets_manager->register(new Widgets\Posts());
+        // $widgets_manager->register(new Widgets\Impresscoder_Author_Banner());
+        // $widgets_manager->register(new Widgets\Impresscoder_Contact_Info());
     }
 
     public function add_widget_categories($elements_manager)
