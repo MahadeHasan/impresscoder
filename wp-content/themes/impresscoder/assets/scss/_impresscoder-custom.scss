@@ -599,3 +599,12 @@ $border-color_1: rgba(255,255,255,.5);
 		}
 	}
 }
+
+.card {
+	.card-img-wrap {
+		img.card-img-top {
+			min-height: inherit;
+			object-fit: cover;
+		}
+	}
+}

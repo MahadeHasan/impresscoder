@@ -229,13 +229,13 @@ function impresscoder_post_classes( $classes ) {
 }
 add_filter( 'post_class', 'impresscoder_post_classes', 10, 3 );
 
-if(!function_exists('impresscoder_filter_excerpt_length')){
-    add_filter( 'excerpt_length', 'impresscoder_filter_excerpt_length' );
-    function impresscoder_filter_excerpt_length(int $length){
-        $length = get_theme_mod('excerpt_length', 55);
-        return $length;
-    }
-}
+// if(!function_exists('impresscoder_filter_excerpt_length')){
+//     add_filter( 'excerpt_length', 'impresscoder_filter_excerpt_length' );
+//     function impresscoder_filter_excerpt_length(int $length){
+//         $length = get_theme_mod('excerpt_length', 55);
+//         return $length;
+//     }
+// }
 
 /**
  * Add a pingback url auto-discovery header for single posts, pages, or attachments.
@@ -316,15 +316,15 @@ function impresscoder_continue_reading_text() {
 }
 
 function impresscoder_continue_reading_link(){
-	return '<a class="more-link d-flex align-items-center gap-1 text-uppercase fw-semibold small letter-spacing-1" href="' . esc_url( get_permalink() ) . '">' . impresscoder_continue_reading_text() . impresscoder_get_icon_svg('ui', 'next2', 12) . '</a>';
+	return '<a class="more-link d-flex align-items-center gap-1 text-uppercase fw-semibold small letter-spacing-1" href="' . esc_url( get_permalink() ) . '">' . impresscoder_continue_reading_text() . impresscoder_get_icon_svg('ui', 'next', 20) . '</a>';
 }
 
-function impresscoder_excerpt_length( $length ) {
-	$custom = get_theme_mod( 'excerpt_length', $length );
+// function impresscoder_excerpt_length( $length ) {
+// 	$custom = get_theme_mod( 'excerpt_length', $length );
 
-	return $length;
-}
-add_filter( 'excerpt_length', 'impresscoder_excerpt_length' );
+// 	return $length;
+// }
+// add_filter( 'excerpt_length', 'impresscoder_excerpt_length' );
 
 /**
  * Creates the continue reading link for excerpt.
@@ -1091,3 +1091,34 @@ if (!function_exists('impresscoder_return_data')) {
         return $data;
     }
 }
+
+//impresscoder_excerpt_length
+function impresscoder_excerpt_length($excerpt)
+{
+	if (has_excerpt()) {
+		$length = get_theme_mod('excerpt_length', 24);
+		$excerpt = wp_trim_words(get_the_excerpt(), $length);
+	}
+	return $excerpt;
+}
+add_filter("the_excerpt", "impresscoder_excerpt_length", 999);
+
+add_action('admin_init', 'impresscoder_fetch_google_fonts');
+function impresscoder_fetch_google_fonts()
+{
+	impresscoder\Google_Fonts::fetch_google_fonts();
+}
+
+
+//post title
+// function genz_post_title()
+// {
+//     $title_tag = get_theme_mod('post_title_tag', 'h2');
+//     echo '<' . esc_attr($title_tag) . ' class="color-linear mb-30 text-heading-2">' . get_the_title() . '</' . esc_attr($title_tag) . '>';
+// }
+
+// function read_more_text()
+// {
+//     $read_more_text = get_theme_mod('read_more_text', 'Read more');
+//     echo $read_more_text;
+// }

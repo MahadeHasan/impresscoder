@@ -42,7 +42,7 @@ extract(wp_parse_args( $args, [
           
             <p><?php echo wp_trim_words(get_the_excerpt(), $excerpt_length);  ?></p>
 
-            <div class="entry-footer d-flex flex-wrap justify-content-between gap-10">
+            <div class="entry-footer mt-3 d-flex flex-wrap justify-content-between gap-10">
                 
                 <?php echo impresscoder_continue_reading_link(); ?>
                 <?php //impresscoder_entry_meta_footer(); ?>

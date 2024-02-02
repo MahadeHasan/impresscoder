@@ -1,6 +1,7 @@
 <?php
 extract(wp_parse_args( $args, [ 
-    'image_size' => 'post-thumbnail', 
+    'image_size' => 'post-thumbnail',   
+    'excerpt_length' => 30
 ])); ?>
 <div <?php post_class('mb-4') ?>>
      <div class="card shadow-hover post-card-1 border-radius-10 hover-up card-post">
@@ -34,28 +35,12 @@ extract(wp_parse_args( $args, [
         <?php endif; ?>  
         <div class="card-body post-content px-3 py-4">
             <?php the_title('<h2 class="post-title fs-4 mb-10"><a href="'.get_permalink().'">', '</a></h2>') ?>
-            <?php if(get_theme_mod('display_excerpt_or_full_post') == 'excerpt'): ?>
                 <div class="entry-summary">
-                    <?php the_excerpt(); ?>
+                <?php echo wp_trim_words(get_the_excerpt(), $excerpt_length);  ?>
                 </div>
-            <?php else: ?>
-                <div class="entry-content">
-                        <?php 
-                        the_content(); 
-                        wp_link_pages(
-                                array(
-                                        'before'   => '<nav class="page-links numeric-pagination d-lg-flex gap-10 " aria-label="' . esc_attr__( 'Page', 'impresscoder' ) . '">',
-                                        'after'    => '</nav>'				
-                                )
-                        );
-                        ?>
-                </div>
-            <?php endif; ?>
-            <div class="entry-footer d-flex align-items-end justify-content-between gap-10">
+            <div class="entry-footer mt-3 d-flex align-items-end justify-content-between gap-10">
                 <?php 
-                    if(get_theme_mod('display_excerpt_or_full_post') == 'excerpt'){
                         echo impresscoder_continue_reading_link();
-                    }          
                 ?>
                 
                 <div class="d-grid">

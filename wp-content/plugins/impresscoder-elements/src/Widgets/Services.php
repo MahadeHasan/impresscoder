@@ -7,7 +7,7 @@ class Services extends \Elementor\Widget_Base
 	use Helper;
 	public function get_name()
 	{
-		return 'impresscoderservices';
+		return 'impresscoder-services';
 	}
 
 	public function get_title()
